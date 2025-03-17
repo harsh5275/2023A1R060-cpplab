@@ -1,0 +1,22 @@
+// Method 1 callbyvalue(Passing Object As Parameter)
+#include<iostream>
+using namespace std;
+class Program{
+    public : int a;
+    Program(int b){
+        a=b;
+    }
+    void Display(){
+        cout<<"Value of a is" << a ;
+    }
+};
+void modify(Program obj2)
+{
+    obj2.a=20;
+}
+int main(){
+    Program obj1(10);
+    obj1.Display();
+    modify(obj1);
+    obj1.Display();
+}
