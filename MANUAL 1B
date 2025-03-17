@@ -1,0 +1,44 @@
+// To create a student class,its constructor ,destructor and member functions.
+#include <iostream>
+using namespace std;
+class student
+{
+private:
+    string studentname, studentid;
+    int sturollnum;
+
+public:
+    void accept()
+    {
+        cout << "enter your student name \n ";
+        cin >> studentname;
+
+        cout << "enter your student id\n";
+        cin >> studentid;
+
+        cout << "\n enter student rollno";
+        cin >> sturollnum;
+    }
+
+    void display()
+    {
+        cout << "\n student name  is " << studentname << "\t student id  is " << studentid << " \t roll number is " << sturollnum;
+    }
+};
+
+int main()
+{
+    string studentname, studentid;
+    int sturollnum;
+    student obj[3];
+
+    int i;
+    for (i = 0; i < 3; i++)
+    {
+        obj[i].accept();
+    }
+    for (i = 0; i < 3; i++)
+    {
+        obj[i].display();
+    }
+}
