@@ -1,0 +1,34 @@
+// WAP to creates a class name BillingApp, with attributes like product name ,price, implement a  function Discount() that calculates 10% discount on price and display result.
+// Discount Function will not modify original price of the product
+
+#include<iostream>
+#include<string>
+using namespace std;
+class BillingApp{
+    private:
+    string productName;
+    double price;
+
+    public:BillingApp(string name,double p){
+        productName = name;
+        price = p;
+    }
+    string getProductName(){
+        return productName;
+    }
+    double getPrice(){
+        return price;
+    }
+    void Discount(){
+        double discountAmount = price * 0.10;
+        double discountedPrice =price -discountAmount;
+        cout << "Product : "<< productName <<endl;
+        cout<< "original price : $ " << price <<endl;
+        cout <<"Discounted Price (after 10% discount) : $"<< discountedPrice << endl;
+    }
+};
+int main(){
+    BillingApp product ("aman",50000.00);
+    product.Discount();
+    return 0;
+}
