@@ -1,0 +1,31 @@
+// WAP to print area of a rectangle by creating a class named 'Area'having one function.Length and breadth of the 
+//rectangle are entered through keyboard using Parameterized constructor
+#include <iostream>
+using namespace std;
+class Area {
+private:
+    float length;
+    float breadth;
+
+public:
+    Area(float l, float b) {
+        length = l;
+        breadth = b;
+    }
+    void calculateArea() {
+        float area = length * breadth;
+        cout << "The area of the rectangle is: " << area << endl;
+    }
+};
+
+int main() {
+    float l, b;
+    cout << "Enter the length of the rectangle: ";
+    cin >> l;
+    cout << "Enter the breadth of the rectangle: ";
+    cin >> b;
+    Area rectangle(l, b);
+    rectangle.calculateArea();
+
+    return 0;
+}
