@@ -1,0 +1,59 @@
+// Write a program to demonstrate working of passing object as reference to function, create a class with name BankApp
+#include <iostream>
+using namespace std;
+
+class BankApp {
+private:
+    string accountHolder;
+    double balance;
+
+public:
+    BankApp(string name, double initial_balance) {
+        accountHolder = name;
+        balance = initial_balance;
+    }
+
+    void displayAccountDetails() {
+        cout << "Account Holder: " << accountHolder << endl;
+        cout << "Balance: $" << balance << endl;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "$" << amount << " deposited successfully." << endl;
+        } else {
+            cout << "Invalid deposit amount!" << endl;
+        }
+    }
+
+    
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            cout << "$" << amount << " withdrawn successfully." << endl;
+        } else {
+            cout << "Invalid withdrawal amount or insufficient balance!" << endl;
+        }
+    }
+    void updateAccountHolderName(string newName) {
+        accountHolder = newName;
+    }
+};
+
+void modifyAccount(BankApp &account) {
+    account.deposit(1000); 
+    account.withdraw(200);
+    account.updateAccountHolderName("Akshit"); 
+}
+
+int main() {
+    BankApp myAccount("Aman", 5000);
+    cout << "Initial Account Details:" << endl;
+    myAccount.displayAccountDetails();
+    modifyAccount(myAccount);
+    cout << "\nUpdated Account Details:" << endl;
+    myAccount.displayAccountDetails();
+
+    return 0;
+}
