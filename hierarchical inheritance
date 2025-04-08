@@ -1,0 +1,115 @@
+WAP to 
+a. Create a base class with name Admin,
+b. Define attributes like username ="" admin" and password = 123
+c.create function Login(), this function will first validate username and password and then display information of the user.
+d. Create function guest_ login(),this function will allow user login for limited time and display only limited information like Welcome message and current login location 
+e. create a derived class 1 with name DBA,
+this class will extend Admin class attributes with login() function, after successfull login
+f.create a function Accept() to store user information
+g.create a derived class 2 with name Guest,
+this class will access Guest_login() function from Admin classand then store Feedback message 
+#include <iostream>
+#include <string>
+#include <ctime>
+using namespace std;
+
+class Admin {
+protected:
+    string username = "admin";
+    string password = "123";
+    
+public:
+    void Login() {
+        string inputUsername, inputPassword;
+        cout << "Enter username: ";
+        cin >> inputUsername;
+        cout << "Enter password: ";
+        cin >> inputPassword;
+        
+        if (inputUsername == username && inputPassword == password) {
+            cout << "Login successful!\n";
+            displayInfo();
+        } else {
+            cout << "Invalid credentials!\n";
+        }
+    }
+    virtual void displayInfo() {
+        cout << "Welcome Admin! You have logged in successfully.\n";
+    }
+
+    void guest_login() {
+        string guestUsername;
+        cout << "Guest Login\n";
+        cout << "Enter username: ";
+        cin >> guestUsername;
+        time_t now = time(0);
+        char* dt = ctime(&now);
+        cout << "Welcome, " << guestUsername << "! Current login location: " << dt;
+    }
+};
+
+class DBA : public Admin {
+public:
+  
+    void Accept() {
+        string userInfo;
+        cout << "Enter additional user information: ";
+        cin.ignore(); 
+        getline(cin, userInfo);
+        cout << "User information stored: " << userInfo << endl;
+    }
+
+    void displayInfo() override {
+        cout << "Welcome, DBA! You have full access to the database.\n";
+    }
+};
+
+class Guest : public Admin {
+private:
+    string feedbackMessage;
+
+public:
+    
+    void storeFeedback() {
+        cout << "Please provide your feedback: ";
+        cin.ignore(); 
+        getline(cin, feedbackMessage);
+        cout << "Thank you for your feedback: " << feedbackMessage << endl;
+    }
+
+    
+    void displayInfo() override {
+        cout << "Welcome Guest! You have limited access.\n";
+        storeFeedback();
+    }
+};
+
+int main() {
+    int choice;
+    
+    cout << "Choose an option:\n";
+    cout << "1. Admin Login\n";
+    cout << "2. Guest Login\n";
+    cout << "3. DBA Login\n";
+    cin >> choice;
+
+    Admin* admin;  
+    
+    if (choice == 1) {
+        admin = new Admin();
+        admin->Login();
+    } else if (choice == 2) {
+        admin = new Admin();
+        admin->guest_login();
+    } else if (choice == 3) {
+        admin = new DBA();
+        admin->Login();
+        dynamic_cast<DBA*>(admin)->Accept();
+    } else {
+        cout << "Invalid choice.\n";
+    }
+
+    delete admin;  
+
+    return 0;
+}
