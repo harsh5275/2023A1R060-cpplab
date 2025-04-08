@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class MYAPP {
+protected:
+    string regNo;
+    float marks;
+    string grade;
+
+public:
+   
+    void Welcome_Message() {
+        cout << " Welcome to the Student Management System" << endl;
+    }
+
+    bool Login() {
+        string pin;
+        cout << "Enter your PIN: ";
+        cin >> pin;
+        if (pin == "123") {
+            cout << "Login successful!\n" << endl;
+            return true;
+        } else {
+            cout << "Invalid PIN. Access denied.\n" << endl;
+            return false;
+        }
+    }
+
+ 
+    void Accept() {
+        cout << "Enter Registration Number: ";
+        cin >> regNo;
+        cout << "Enter Marks out of 100: ";
+        cin >> marks;
+    }
+
+    void Display() {
+        cout << "\n=== Student Information ===" << endl;
+        cout << "Registration Number: " << regNo << endl;
+        cout << "Marks: " << marks << endl;
+    }
+
+    float getMarks() {
+        return marks;
+    }
+
+    void setGrade(string g) {
+        grade = g;
+    }
+
+    string getGrade() {
+        return grade;
+    }
+};
+
+
+class Grade_Cal : public MYAPP {
+public:
+ 
+    void Calc() {
+        float percentage = getMarks();
+        cout << "Percentage: " << percentage << "%" << endl;
+
+        if (percentage >= 80 && percentage <= 100) {
+            grade = "A";
+        } else if (percentage >= 70 && percentage < 80) {
+            grade = "B";
+        } else if (percentage >= 60 && percentage < 70) {
+            grade = "C";
+        } else {
+            grade = "Not Qualified";
+        }
+
+        cout << "Grade: " << grade << endl;
+    }
+};
+
+class Course_Selection : public Grade_Cal {
+public:
+ 
+    void Select() {
+        string g = getGrade();
+        string course;
+
+        if (g == "A") {
+            course = "Science";
+        } else if (g == "B") {
+            course = "Commerce";
+        } else if (g == "C") {
+            course = "Arts";
+        } else {
+            course = "No course assigned (Not Qualified)";
+        }
+
+        cout << "Course Assigned: " << course << endl;
+    }
+};
+
+
+int main() {
+    Course_Selection student;
+    student.Welcome_Message();
+
+    if (student.Login()) {
+        student.Accept();
+        student.Display();
+        student.Calc();
+        student.Select();
+    }
+
+    return 0;
+}
