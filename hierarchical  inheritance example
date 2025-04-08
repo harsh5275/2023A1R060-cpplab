@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+class Parent1
+{
+    public : void Fun1()
+    {
+        cout<<"Parent class Function";
+    }
+};
+class Child1 : public Parent1
+{
+    public : void Fun2()
+    {
+        cout<<"Child class 1 Function";
+    }
+};
+class Child2 : public Parent1
+{
+    public : void Fun3()
+    {
+        cout<<"Child class 2 Function";
+    }
+};
+class Child3 : public Parent1
+{
+    public : void Fun4()
+    {
+        cout<<"Child class 3 Function";
+    }
+};
+int main()
+{
+    Child1 obj1;
+    obj1.Fun1();
+    obj1.Fun2();
+    Child2 obj2;
+    obj2.Fun1();
+    obj2.Fun3();
+    Child3 obj3;
+    obj3.Fun1();
+    obj3.Fun4();
+}
